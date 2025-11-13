@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "xml_generator",
+    'name': "lms_inventory",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -22,11 +22,9 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/weekday.xml',
         'views/templates.xml',
-
-        "wizard/xml_generator.xml"
     ],
     # only loaded in demonstration mode
     'demo': [

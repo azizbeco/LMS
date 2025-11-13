@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="make_schedule_form" model="ir.ui.view">
+            <field name="name">Make schedule</field>
+            <field name="model">le.education.group.schedule.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="group_id"/>
+                            <field name="name"/>
+<!--                            <field name="teacher_id"/>-->
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="weekday_ids" widget="many2many_tags"/>
+                            <field name="lesson_start_time" widget="float_time"/>
+                            <field name="lesson_end_time" widget="float_time"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" name="make_schedule" string="Create" class="btn-primary"/>
+                        <button special="cancel" string="Close"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="make_schedule_action" model="ir.actions.act_window">
+            <field name="name">Make Schedule</field>
+            <field name="res_model">le.education.group.schedule.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "xml_generator",
+    'name': "user_management",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -23,10 +23,9 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/weekday.xml',
-        'views/templates.xml',
-
-        "wizard/xml_generator.xml"
+        'views/lu_teacher.xml',
+        'views/student.xml',
+        'views/menuitem.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,0 +1,40 @@
+
+            <odoo>
+                <data>
+                    <record id="lu_teacher_list" model="ir.ui.view">
+                        <field name="name">Teacher</field>
+                        <field name="model">lu.teacher</field>
+                        <field name="arch" type="xml">
+                            <list>
+                                <field name="name"/>
+                                <field name="experience_years"/>
+                                <field name="worked_places"/>
+                            </list>
+                        </field>
+                    </record>
+                    <record id="lu_teacher_form" model="ir.ui.view">
+                        <field name="name">Teacher</field>
+                        <field name="model">lu.teacher</field>
+                        <field name="arch" type="xml">
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="login"/>
+                                        <field name="experience_years"/>
+                                        <field name="worked_places"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </record>
+            
+                    <record id="lu_teacher_action" model="ir.actions.act_window">
+                        <field name="name">Teacher</field>
+                        <field name="res_model">lu.teacher</field>
+                        <field name="view_mode">list,form</field>
+                    </record>
+
+                </data>
+            </odoo>
+        
