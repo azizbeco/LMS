@@ -1,3 +1,5 @@
+from tkinter.constants import CASCADE
+
 from odoo import models, fields,api
 from datetime import timedelta
 
@@ -8,7 +10,7 @@ class ScheduleTable(models.Model):
 
     name = fields.Char(string="Name", required=True)
     group_id = fields.Many2one("le.group", string="Group", required=True)
-    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons")
+    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons",CASCADE="Ondelete")
 
     teacher_id = fields.Many2one("res.users", string="Teacher",)
 
