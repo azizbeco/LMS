@@ -7,3 +7,5 @@ access_le_homework,access_le_homework,model_le_homework,base.group_user,1,1,1,1
 access_le_schedule_table,access_le_schedule_table,model_le_schedule_table,base.group_user,1,1,1,1
 access_le_schedule_lesson,access_le_schedule_lesson,model_le_schedule_lesson,base.group_user,1,1,1,1
 access_le_education_group_schedule_wizard,access_le_education_group_schedule_wizard,model_le_education_group_schedule_wizard,base.group_user,1,1,1,1
+,,,,,,,
+access_le_group_student,access_le_group_student,model_le_group_student,base.group_user,1,1,1,1

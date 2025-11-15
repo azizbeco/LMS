@@ -16,11 +16,28 @@
                         <field name="model">le.course</field>
                         <field name="arch" type="xml">
                             <form>
+                                <header>
+                                    <button name="action_create_group" type="object" string="Create Group" class="btn-primary"/>
+                                    <button name="action_open" type="object" string="Open" class="btn-primary" invisible="status != 'draft' and status != 'closed'"/>
+                                    <button name="action_closed" type="object" string="Closed" class="btn-danger" invisible="status != 'open'"/>
+                                    <button name="action_draft" type="object" string=" Reset Draft" class="btn-success" invisible="status != 'open' and status != 'closed'"/>
+                                </header>
                                 <sheet>
                                     <group>
                                         <field name="name"/>
                                         <field name="subject_ids" widget="many2many_tags"/>
+                                        <field name="status" invisible="1"/>
                                     </group>
+
+                                    <notebook>
+                                        <page string="Lesson Pages">
+                                            <field name="lesson_ids">
+                                                <list>
+                                                    <field name="name"/>
+                                                </list>
+                                            </field>
+                                        </page>
+                                    </notebook>
                                 </sheet>
                             </form>
                         </field>

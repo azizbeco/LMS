@@ -17,13 +17,23 @@
                         <field name="arch" type="xml">
                             <form>
                                 <header>
-                                        <button name="make_schedule_wizard" type="object" string="Make Schedule" class="btn-primary"/>
+                                    <button name="make_schedule_wizard" type="object" string="Make Schedule" class="btn-primary" />
                                 </header>
                                 <sheet>
                                     <group>
                                         <field name="name"/>
                                         <field name="course_id"/>
                                     </group>
+                                    <notebook>
+                                        <page string="Student List">
+                                            <field name="group_student_ids">
+                                                <list editable="top">
+                                                    <field name="student_id"/>
+                                                    <field name="status"/>
+                                                </list>
+                                            </field>
+                                        </page>
+                                    </notebook>
                                 </sheet>
                             </form>
                         </field>

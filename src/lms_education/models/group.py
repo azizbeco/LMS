@@ -8,8 +8,10 @@ class Group(models.Model):
     _name = "le.group"
     _description = "Group"
 
-    name = fields.Char(string="Name", required=True)
+    group_student_ids = fields.One2many("le.group.student","group_id")
     course_id = fields.Many2one("le.course", string="Course", required=True)
+    name = fields.Char(string="Name", required=True)
+
 
 
     def make_schedule_wizard(self):
