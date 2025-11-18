@@ -25,10 +25,6 @@ class ScheduleTable(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        for record in self:
-            self.env["lu.teacher"].search([
-                ("")
-            ])
         records = super().create(vals_list)
         for record in records:
             current_date = record.start_date
