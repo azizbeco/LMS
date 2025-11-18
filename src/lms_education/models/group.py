@@ -9,7 +9,8 @@ class Group(models.Model):
     _description = "Group"
 
     group_student_ids = fields.One2many("le.group.student","group_id")
-    course_id = fields.Many2one("le.course", string="Course", required=True)
+    course_id = fields.Many2one("le.course", string="Course", required=True,ondelete="cascade")
+    schedule_table_ids = fields.One2many("le.schedule.table","group_id")
     name = fields.Char(string="Name", required=True)
 
 

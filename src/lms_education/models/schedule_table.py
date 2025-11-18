@@ -1,4 +1,3 @@
-from tkinter.constants import CASCADE
 
 from odoo import models, fields,api
 from datetime import timedelta
@@ -10,7 +9,7 @@ class ScheduleTable(models.Model):
 
     name = fields.Char(string="Name", required=True)
     group_id = fields.Many2one("le.group", string="Group", required=True)
-    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons",CASCADE="Ondelete")
+    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons", ondelete="cascade")
 
     teacher_id = fields.Many2one("res.users", string="Teacher",)
 
@@ -20,26 +19,66 @@ class ScheduleTable(models.Model):
     lesson_start_time = fields.Float(string="Start Time")
     lesson_end_time = fields.Float(string="End Time")
 
+
+
+
+
     @api.model_create_multi
     def create(self, vals_list):
+        for record in self:
+            self.env["lu.teacher"].search([
+                ("")
+            ])
         records = super().create(vals_list)
         for record in records:
             current_date = record.start_date
             lesson_weekdays = []
             for day in record.weekday_ids:
-                lesson_weekdays.append(day.code)
+                try:
+                    lesson_weekdays.append(day.code)
+                except (TypeError,ValueError):
+                    continue
+            if not lesson_weekdays:
+                continue
 
-            while current_date <= record.end_date:
-                if current_date.weekday() in lesson_weekdays:
+            lessons =  record.group_id.course_id.lesson_ids
+            total_lessons = len(lessons)
+            lesson_index = 0
+
+            sorted_lesson_weekdays = sorted(lesson_weekdays)
+            while current_date <= record.end_date and lesson_index < total_lessons:
+                if current_date.weekday() in sorted_lesson_weekdays:
+
+                    lesson = lessons[lesson_index]
+
                     vals = {
-                        'name': f"{current_date}",
+                        'name': lesson.name,
                         'schedule_table_id': record.id,
-                        'lesson_date':current_date,
-                        'lesson_start_time':record.lesson_start_time,
-                        'lesson_end_time':record.lesson_end_time
+                        'lesson_date': current_date,
+                        'lesson_start_time': record.lesson_start_time,
+                        'lesson_end_time': record.lesson_end_time,
                     }
-                    print(vals)
+
                     self.env["le.schedule.lesson"].create(vals)
+                    lesson_index += 1
+
                 current_date += timedelta(days=1)
         return records
+
+            # while current_date <= record.end_date:
+            #     if current_date.weekday() in lesson_weekdays:
+            #         for lesson in record.group_id.course_id.lesson_ids:
+            #             if lesson:
+            #                 vals = {
+            #                     'name': f"{lesson.name}",
+            #                     'schedule_table_id': record.id,
+            #                     'lesson_date':current_date,
+            #                     'lesson_start_time':record.lesson_start_time,
+            #                     'lesson_end_time':record.lesson_end_time
+            #                 }
+            #                 print(vals)
+            #                 self.env["le.schedule.lesson"].create(vals)
+            #
+            #         current_date += timedelta(days=1)
+        # return records
 
