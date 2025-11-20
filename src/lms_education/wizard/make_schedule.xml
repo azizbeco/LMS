@@ -19,7 +19,7 @@
                         </group>
                     </sheet>
                     <footer>
-                        <button type="object" name="make_schedule" string="Create" class="btn-primary"/>
+<!--                        <button type="object" name="make_schedule" string="Create" class="btn-primary"/>-->
                         <button special="cancel" string="Close"/>
                     </footer>
                 </form>

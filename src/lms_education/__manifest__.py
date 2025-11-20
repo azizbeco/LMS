@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Education",
-    'depends': ["common"],
+    'depends': ["common","lms_user"],
 
     'data': [
         'security/ir.model.access.csv',
@@ -13,7 +13,7 @@
         'views/schedule_table.xml',
         'views/schedule_lesson.xml',
         'views/menuitem.xml',
-        'wizard/make_schedule.xml'
+        # 'wizard/make_schedule.xml'
     ],
 }
 

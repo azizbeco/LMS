@@ -23,8 +23,6 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/weekday.xml',
-        'views/templates.xml',
 
         "wizard/xml_generator.xml"
     ],

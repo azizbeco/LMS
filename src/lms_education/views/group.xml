@@ -17,7 +17,7 @@
                         <field name="arch" type="xml">
                             <form>
                                 <header>
-                                    <button name="make_schedule_wizard" type="object" string="Make Schedule" class="btn-primary" />
+                                    <button name="make_schedule" type="object" string="Make Schedule" class="btn-primary" />
                                 </header>
                                 <sheet>
                                     <group>
@@ -37,7 +37,7 @@
                                             <field name="schedule_table_ids">
                                                 <list>
                                                     <field name="name"/>
-                                                    <field name="teacher_id"/>
+<!--                                                    <field name="teacher_id"/>-->
                                                     <field name="start_date"/>
                                                     <field name="end_date"/>
                                                     <field name="weekday_ids" widget="many2many_tags"/>

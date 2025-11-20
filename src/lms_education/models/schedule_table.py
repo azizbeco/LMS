@@ -3,15 +3,16 @@ from odoo import models, fields,api
 from datetime import timedelta
 
 
+
 class ScheduleTable(models.Model):
     _name = "le.schedule.table"
     _description = "Schedule Table"
 
     name = fields.Char(string="Name", required=True)
-    group_id = fields.Many2one("le.group", string="Group", required=True)
-    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons", ondelete="cascade")
+    group_id = fields.Many2one("le.group", string="Group", required=True,ondelete="cascade")
+    schedule_lesson_ids = fields.One2many("le.schedule.lesson", "schedule_table_id", string="Schedule Lessons")
 
-    teacher_id = fields.Many2one("res.users", string="Teacher",)
+    teacher_id = fields.Many2one("lu.teacher", string="Teacher")
 
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")
@@ -61,20 +62,4 @@ class ScheduleTable(models.Model):
                 current_date += timedelta(days=1)
         return records
 
-            # while current_date <= record.end_date:
-            #     if current_date.weekday() in lesson_weekdays:
-            #         for lesson in record.group_id.course_id.lesson_ids:
-            #             if lesson:
-            #                 vals = {
-            #                     'name': f"{lesson.name}",
-            #                     'schedule_table_id': record.id,
-            #                     'lesson_date':current_date,
-            #                     'lesson_start_time':record.lesson_start_time,
-            #                     'lesson_end_time':record.lesson_end_time
-            #                 }
-            #                 print(vals)
-            #                 self.env["le.schedule.lesson"].create(vals)
-            #
-            #         current_date += timedelta(days=1)
-        # return records
 

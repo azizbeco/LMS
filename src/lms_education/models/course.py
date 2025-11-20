@@ -10,7 +10,7 @@ class Course(models.Model):
 
     name = fields.Char(string="Name", required=True)
     lesson_ids = fields.One2many("le.lesson", "course_id", string="Lessons")
-    subject_ids = fields.Many2many("le.subject", string="Subjects",ondelete="cascade")
+    subject_ids = fields.Many2many("le.subject", string="Subjects")
 
     status = fields.Selection([
         ("draft", "Draft"),

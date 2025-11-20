@@ -8,6 +8,7 @@
                             <list>
                                 <field name="name"/>
                                 <field name="schedule_table_id"/>
+                                <field name="teacher_id"/>
                                 <field name="lesson_date"/>
                                 <field name="lesson_start_time"/>
                                 <field name="lesson_end_time"/>
@@ -19,10 +20,14 @@
                         <field name="model">le.schedule.lesson</field>
                         <field name="arch" type="xml">
                             <form>
+                                 <header>
+                                    <button name="schedule_lesson_move_button" type="object" string="Move Lesson" class="btn-primary" />
+                                </header>
                                 <sheet>
                                     <group>
                                         <field name="name"/>
                                         <field name="schedule_table_id"/>
+                                        <field name="teacher_id"/>
                                         <field name="lesson_date"/>
                                         <field name="lesson_start_time" widget="float_time"/>
                                         <field name="lesson_end_time" widget="float_time"/>
@@ -36,8 +41,50 @@
                         <field name="name">Schedule Lesson</field>
                         <field name="res_model">le.schedule.lesson</field>
                         <field name="view_mode">list,form</field>
+                        <field name="view_ids" eval="[Command.clear(),
+                        Command.create({'view_mode': 'list', 'view_id': ref('schedule_lesson_list'), 'sequence': 1}),
+                        Command.create({'view_mode': 'form', 'view_id': ref('schedule_lesson_form'),'sequence': 2})]"/>
                     </record>
-            
+
+
+                    <record id="move_schedule_lesson_form" model="ir.ui.view">
+                        <field name="name">Move Schedule Leson Form</field>
+                        <field name="model">le.schedule.lesson</field>
+                        <field name="arch" type="xml">
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="name" readonly="1"/>
+                                            <field name="lesson_date" readonly="1"/>
+                                            <field name="skip_or_move_lesson"/>
+                                            <field name="schedule_table_id"  invisible="True"/>
+
+                                        </group>
+                                        <group>
+                                            <field name="next_lesson_date" invisible="skip_or_move_lesson != 'move'"/>
+                                            <field name="skip_lesson_date"  invisible="skip_or_move_lesson != 'skip'"/>
+                                            <field name="skip_lesson_start_time"  invisible="skip_or_move_lesson != 'skip'"/>
+                                            <field name="skip_lesson_end_time"  invisible="skip_or_move_lesson != 'skip'"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                                <footer>
+                                    <button type="object" name="move_schedule_lesson" string="Done" class="btn-primary" invisible="skip_or_move_lesson != 'move'"/>
+                                    <button type="object" name="skip_schedule_lesson" string="Update" class="btn-primary" invisible="skip_or_move_lesson != 'skip'"/>
+                                    <button special="cancel" string="Close"/>
+                                </footer>
+                            </form>
+                        </field>
+                    </record>
+
+                    <record id="move_schedule_lesson_action" model="ir.actions.act_window">
+                        <field name="name">Move Schedule Lesson Action</field>
+                        <field name="res_model">le.schedule.lesson</field>
+                        <field name="view_mode">form</field>
+                        <field name="view_id" ref="lms_education.move_schedule_lesson_form"/>
+                    </record>
+
                 </data>
             </odoo>
         
